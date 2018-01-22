@@ -1,0 +1,19 @@
+body {
+  padding: 50px;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+a {
+  cursor: pointer;
+}
+
+button.delete,
+button.edit {
+  float: right;
+  margin: 5px;
+}
+
+.noteHistory {
+  overflow: auto;
+  padding: 5px;
+}
