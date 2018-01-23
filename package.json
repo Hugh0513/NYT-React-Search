@@ -1,38 +1,24 @@
 {
-  "name": "nyt-scraper",
+  "name": "mern",
   "version": "1.0.0",
-  "engines": {
-    "node": "8.2.1",
-    "npm": "5.3.0"
-  },
-  "description": "",
-  "main": "app.js",
+  "description": "Mern Demo",
+  "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/Hugh0513/NYT-Scraper.git"
+    "server": "node server.js",
+    "client": "node scripts/start-client.js",
+    "start": "concurrently \"nodemon server.js\" \"npm run client\"",
+    "build": "node scripts/build.js",
+    "build-and-start": "node scripts/build-and-start.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/Hugh0513/NYT-Scraper/issues"
+  "devDependencies": {
+    "concurrently": "^3.5.0",
+    "nodemon": "^1.11.0"
   },
-  "homepage": "https://github.com/Hugh0513/NYT-Scraper#readme",
   "dependencies": {
-    "axios": "^0.17.1",
-    "body-parser": "^1.18.2",
-    "cheerio": "^1.0.0-rc.2",
-    "cookie-parser": "^1.4.3",
-    "express": "^4.16.2",
-    "express-handlebars": "^3.0.0",
-    "hbs": "^4.0.1",
-    "mongojs": "^2.4.1",
-    "mongoose": "^4.13.9",
-    "morgan": "^1.9.0",
-    "request": "^2.83.0",
-    "serve-favicon": "^2.4.5"
+    "express": "^4.15.4",
+    "opn": "^5.2.0"
   }
 }
