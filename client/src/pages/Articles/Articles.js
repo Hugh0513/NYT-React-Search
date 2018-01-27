@@ -11,6 +11,7 @@ import { Input, FormBtn } from "../../components/Form";
 
 class Articles extends Component {
   state = {
+    nytarticles: [],
     articles: [],
     articleSearch: ""
   };
@@ -19,10 +20,10 @@ class Articles extends Component {
     this.loadArticles();
   }
 
-  getNytArticles = () => {
-    API.getNytArticles()
+  getNytArticles = event => {
+    API.getNytArticles(this.state.topic)
       .then(res =>
-        this.setState({ articles: res.data, topic: "", startyear: "", endyear: "" })
+        this.setState({ nytarticles: res.data, topic: "", startyear: "", endyear: "" })
       )
       .catch(err => console.log(err));
   };
@@ -100,18 +101,16 @@ class Articles extends Component {
               <h1>Results</h1>
             </Jumbotron>
 
-              {this.state.articles.length === 0 ? (
+              {this.state.nytarticles.length === 0 ? (
                 <h1 className="text-center">No Articless to Display</h1>
               ) : (
                 <ArticleList>
-                  {this.state.articles.map(article => {
+                  {this.state.nytarticles.map(nytarticle => {
                     return (
                       <ArticleListItem
-                        key={article.title}
-                        title={article.title}
-                        href={article.href}
-                        ingredients={article.ingredients}
-                        thumbnail={article.thumbnail}
+                        key={nytarticle.title}
+                        title={nytarticle.title}
+                        href={nytarticle.href}
                       />
                     );
                   })}
@@ -132,7 +131,7 @@ class Articles extends Component {
                         {article.title}
                       </strong>
                     </Link>
-                    <DeleteBtn onClick={() => this.deleteBook(article._id)} />
+                    <DeleteBtn onClick={() => this.deleteArticle(article._id)} />
                   </ListItem>
                 ))}
               </List>

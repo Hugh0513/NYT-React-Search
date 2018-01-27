@@ -13,8 +13,8 @@ export default {
   deleteArtile: function(id) {
     return axios.delete("/api/articles/" + id);
   },
-  getNytArtiles: function() {
-    return axios.get("/api/nytarticles/");
+  getNytArticles: function(query) {
+    return axios.get("/api/nytarticles/", { params: { q: query}});
   }
 
 };
