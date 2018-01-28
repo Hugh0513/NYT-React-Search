@@ -13,7 +13,10 @@ class Articles extends Component {
   state = {
     nytarticles: [],
     articles: [],
-    articleSearch: ""
+    topic: "",
+    startyear: "", 
+    endyear: ""
+    //articleSearch: ""
   };
 
   componentDidMount() {
@@ -57,9 +60,10 @@ class Articles extends Component {
     if (this.state.topic) {
       console.log("clicked")
       API.getNytArticles(this.state.topic)
-        .then(res => this.setState({ nytarticles: res.data, topic: "", startyear: "", endyear: ""  }))
+        //.then(res => this.setState({ nytarticles: res.data, topic: "", startyear: "", endyear: ""  }))
+        .then(res => this.setState({ nytarticles: res.data.response.docs, topic: "", startyear: "", endyear: ""  }))
+        //.then(res => console.log(res.data.response.docs))
         .catch(err => console.log(err));
-
     }
   };
 
@@ -110,8 +114,8 @@ class Articles extends Component {
                   {this.state.nytarticles.map(nytarticle => {
                     return (
                       <ArticleListItem
-                        key={nytarticle.title}
-                        title={nytarticle.title}
+                        key={nytarticle.headline.main}
+                        title={nytarticle.headline.main}
                         href={nytarticle.href}
                       />
                     );
