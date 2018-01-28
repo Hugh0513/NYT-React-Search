@@ -3,9 +3,9 @@ import "./ArticleList.css";
 
 export const ArticleList = ({ children }) => {
   return (
-    <div className="list-overflow-container">
+    <div className="well list-overflow-container">
       <ul className="list-group">
-        {children}
+        <h3 class='articleHeadline'>{children}</h3>
       </ul>
     </div>
   );
