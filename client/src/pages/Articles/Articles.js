@@ -20,6 +20,7 @@ class Articles extends Component {
     this.loadArticles();
   }
 
+  /*
   getNytArticles = event => {
     API.getNytArticles(this.state.topic)
       .then(res =>
@@ -27,6 +28,7 @@ class Articles extends Component {
       )
       .catch(err => console.log(err));
   };
+  */
 
   loadArticles = () => {
     API.getArticles()
@@ -53,9 +55,9 @@ class Articles extends Component {
     event.preventDefault();
 
     if (this.state.topic) {
-
-      API.getNytArticles(this.state.articleSearch)
-        .then(res => this.setState({ articles: res.data }))
+      console.log("clicked")
+      API.getNytArticles(this.state.topic)
+        .then(res => this.setState({ nytarticles: res.data, topic: "", startyear: "", endyear: ""  }))
         .catch(err => console.log(err));
 
     }
