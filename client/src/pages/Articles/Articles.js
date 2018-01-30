@@ -47,6 +47,12 @@ class Articles extends Component {
       .catch(err => console.log(err));
   };
 
+  saveArticles = id => {
+    API.saveArticles(id)
+      .then(res => this.loadArticles())
+      .catch(err => console.log(err));
+  };
+
   handleInputChange = event => {
     const { name, value } = event.target;
     this.setState({
@@ -58,7 +64,7 @@ class Articles extends Component {
     event.preventDefault();
 
     if (this.state.topic) {
-      console.log("clicked")
+      //console.log("clicked")
       API.getNytArticles(this.state.topic)
         //.then(res => this.setState({ nytarticles: res.data, topic: "", startyear: "", endyear: ""  }))
         .then(res => this.setState({ nytarticles: res.data.response.docs, topic: "", startyear: "", endyear: ""  }))
@@ -111,15 +117,16 @@ class Articles extends Component {
                 <h1 className="text-center">No Articless to Display</h1>
               ) : (
                 <ArticleList>
-                  {this.state.nytarticles.map(nytarticle => {
-                    return (
+                  {this.state.nytarticles.map(nytarticle => (
+                      <a href={nytarticle.web_url}>
                       <ArticleListItem
                         key={nytarticle.headline.main}
                         title={nytarticle.headline.main}
-                        href={nytarticle.href}
-                      />
-                    );
-                  })}
+                        href={nytarticle.web_url}
+                      >
+                      </ArticleListItem>
+                      </a>
+                  ))}
                 </ArticleList>
               )}
 
