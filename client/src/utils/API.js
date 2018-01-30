@@ -13,6 +13,9 @@ export default {
   deleteArtile: function(id) {
     return axios.delete("/api/articles/" + id);
   },
+  saveArtile: function(articleData) {
+    return axios.post("/api/articles/" + articleData);
+  },
   getNytArticles: function(query) {
     console.log(query);
     var authKey = "b9f91d369ff59547cd47b931d8cbc56b:0:74623931";

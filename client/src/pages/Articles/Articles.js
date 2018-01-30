@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import DeleteBtn from "../../components/DeleteBtn";
+import SaveBtn from "../../components/SaveBtn";
 import Jumbotron from "../../components/Jumbotron";
 import API from "../../utils/API";
 import { Link } from "react-router-dom";
@@ -47,8 +48,11 @@ class Articles extends Component {
       .catch(err => console.log(err));
   };
 
-  saveArticles = id => {
-    API.saveArticles(id)
+  saveArticles = event => {
+    API.saveArticles({
+      title: this.state.title,
+      url: this.state.url
+    })
       .then(res => this.loadArticles())
       .catch(err => console.log(err));
   };
@@ -118,6 +122,7 @@ class Articles extends Component {
               ) : (
                 <ArticleList>
                   {this.state.nytarticles.map(nytarticle => (
+                    <div>
                       <a href={nytarticle.web_url}>
                       <ArticleListItem
                         key={nytarticle.headline.main}
@@ -126,6 +131,11 @@ class Articles extends Component {
                       >
                       </ArticleListItem>
                       </a>
+                      <SaveBtn onClick={() => this.saveArticles({
+                        title: nytarticle.headline.main,
+                        url: nytarticle.web_url
+                      })} ></SaveBtn>
+                    </div>
                   ))}
                 </ArticleList>
               )}
