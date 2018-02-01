@@ -13,8 +13,10 @@ export default {
   deleteArtile: function(id) {
     return axios.delete("/api/articles/" + id);
   },
-  saveArtile: function(articleData) {
-    return axios.post("/api/articles/" + articleData);
+  saveArticle: function(articleData) {
+    console.log(articleData);
+    console.log("/api/articles", articleData);
+    return axios.post("/api/articles", articleData);
   },
   getNytArticles: function(query) {
     console.log(query);

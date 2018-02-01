@@ -24,34 +24,27 @@ class Articles extends Component {
     this.loadArticles();
   }
 
-  /*
-  getNytArticles = event => {
-    API.getNytArticles(this.state.topic)
-      .then(res =>
-        this.setState({ nytarticles: res.data, topic: "", startyear: "", endyear: "" })
-      )
-      .catch(err => console.log(err));
-  };
-  */
-
   loadArticles = () => {
     API.getArticles()
       .then(res =>
+        //console.log(res.data)
         this.setState({ articles: res.data, topic: "", startyear: "", endyear: "" })
       )
       .catch(err => console.log(err));
   };
 
   deleteArticles = id => {
-    API.deleteArticles(id)
+    API.deleteArticle(id)
       .then(res => this.loadArticles())
       .catch(err => console.log(err));
   };
 
   saveArticles = event => {
-    API.saveArticles({
-      title: this.state.title,
-      url: this.state.url
+    //event.preventDefault(); //error
+    API.saveArticle({
+      title: event.title,
+      url: event.url,
+      snippet: event.snippet
     })
       .then(res => this.loadArticles())
       .catch(err => console.log(err));
@@ -66,7 +59,6 @@ class Articles extends Component {
 
   handleFormSubmit = event => {
     event.preventDefault();
-
     if (this.state.topic) {
       //console.log("clicked")
       API.getNytArticles(this.state.topic)
@@ -116,30 +108,26 @@ class Articles extends Component {
             <Jumbotron>
               <h1>Results</h1>
             </Jumbotron>
-
               {this.state.nytarticles.length === 0 ? (
                 <h1 className="text-center">No Articless to Display</h1>
               ) : (
                 <ArticleList>
                   {this.state.nytarticles.map(nytarticle => (
-                    <div>
-                      <a href={nytarticle.web_url}>
-                      <ArticleListItem
-                        key={nytarticle.headline.main}
-                        title={nytarticle.headline.main}
+                    <ArticleListItem
+                        key={nytarticle._id}
+                        title={nytarticle.title}
                         href={nytarticle.web_url}
-                      >
-                      </ArticleListItem>
-                      </a>
+                    >
+                      <a href={nytarticle.web_url}>{nytarticle.headline.main}</a>
                       <SaveBtn onClick={() => this.saveArticles({
                         title: nytarticle.headline.main,
-                        url: nytarticle.web_url
-                      })} ></SaveBtn>
-                    </div>
+                        url: nytarticle.web_url,
+                        snippet: nytarticle.snippet
+                      })} />
+                    </ArticleListItem>
                   ))}
                 </ArticleList>
               )}
-
           </div>
           <div size="md-6 sm-12">
             <Jumbotron>
@@ -147,7 +135,7 @@ class Articles extends Component {
             </Jumbotron>
             {this.state.articles.length ? (
               <List>
-                {this.state.artiles.map(article => (
+                {this.state.articles.map(article => (
                   <ListItem key={article._id}>
                     <Link to={"/articles/" + article._id}>
                       <strong>
