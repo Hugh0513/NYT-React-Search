@@ -26,9 +26,17 @@ export default {
     //authKey + "&q=" + query;
     var queryURLBase = "https://api.nytimes.com/svc/search/v2/articlesearch.json?api-key=" + authKey
     console.log(queryURLBase);
+    var startyear, endyear;
+    if (query.startyear !== ""){
+      startyear = query.startyear + "0101"
+    }
+    if (query.endyear !== ""){
+      endyear = query.endyear + "1231"
+    }
     //return axios.get("/api/nytarticles", { params: { q: query}});
     //console.log(axios.get(queryURLBase, { params: { q: query}}));
-    return axios.get(queryURLBase, { params: { q: query}});
+    return axios.get(queryURLBase, { params: { q: query.topic, begin_date: startyear, end_date: endyear }});
+    //return axios.get(queryURLBase, { q: query.topic, begin_date: startyear, end_date: endyear });
   }
 
 };

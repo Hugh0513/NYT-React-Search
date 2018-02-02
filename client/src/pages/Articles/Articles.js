@@ -61,7 +61,11 @@ class Articles extends Component {
     event.preventDefault();
     if (this.state.topic) {
       //console.log("clicked")
-      API.getNytArticles(this.state.topic)
+      API.getNytArticles({
+        topic: this.state.topic,
+        startyear: this.state.startyear,
+        endyear: this.state.endyear
+      })
         //.then(res => this.setState({ nytarticles: res.data, topic: "", startyear: "", endyear: ""  }))
         .then(res => this.setState({ nytarticles: res.data.response.docs, topic: "", startyear: "", endyear: ""  }))
         //.then(res => console.log(res.data.response.docs))
