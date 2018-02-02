@@ -6,11 +6,12 @@ export default {
     return axios.get("/api/articles");
   },
   // Gets the article with the given id
-  getArtile: function(id) {
+  getArticle: function(id) {
     return axios.get("/api/articles/" + id);
   },
   // Deletes the article with the given id
-  deleteArtile: function(id) {
+  deleteArticle: function(id) {
+    console.log(id);
     return axios.delete("/api/articles/" + id);
   },
   saveArticle: function(articleData) {

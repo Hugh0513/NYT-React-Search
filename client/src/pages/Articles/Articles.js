@@ -142,7 +142,7 @@ class Articles extends Component {
                         {article.title}
                       </strong>
                     </Link>
-                    <DeleteBtn onClick={() => this.deleteArticle(article._id)} />
+                    <DeleteBtn onClick={() => this.deleteArticles(article._id)} />
                   </ListItem>
                 ))}
               </List>
